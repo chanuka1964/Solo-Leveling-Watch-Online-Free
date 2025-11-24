@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solo Leveling Streaming</title>
+
+<style>
+body, html {
+  margin:0; padding:0;
+  font-family: Arial, sans-serif;
+  overflow-x:hidden;
+}
+
+/* LOGIN PAGE */
+#loginPage {
+  width:100vw; height:100vh;
+  display:flex; flex-direction:column;
+  justify-content:center; align-items:center;
+  background:black;
+}
+.login-input {
+  width:250px; padding:12px; margin:10px;
+  border:2px solid white; border-radius:6px;
+  font-size:18px; background:black; color:white;
+}
+.login-btn {
+  width:130px; padding:12px; font-size:18px;
+  margin-top:10px; cursor:pointer;
+  border:none; border-radius:6px;
+  background:#222; color:white;
+}
+.login-btn:hover{background:#555;}
+#loginError { color:red; font-size:18px; display:none; margin-top:10px; }
+
+/* PAGES */
+.page {
+  width:100vw; height:100vh;
+  display:none;
+  background:url("https://i.pinimg.com/736x/12/39/bd/1239bd52ed659fbdb6a941bc87d26c53.jpg")
+  no-repeat center center/cover;
+  overflow:auto;
+  opacity:0; transition: opacity 0.45s ease-in-out;
+}
+.page.active {display:block; opacity:1;}
+
+.main-title {
+  text-align:center; color:white;
+  font-size:64px; text-shadow:4px 4px 10px black;
+  margin-top:50px;
+}
+
+.sub-btn {
+  display:block; width:240px; margin:25px auto;
+  font-size:26px; padding:16px;
+  border:none; border-radius:8px;
+  background:rgba(0,0,0,0.6);
+  color:white; cursor:pointer;
+}
+.sub-btn:hover{background:rgba(0,0,0,0.85); transform:scale(1.05);}
+
+.episode-title {
+  text-align:center; font-size:42px;
+  color:white; margin-top:40px;
+  text-shadow:2px 2px 6px black;
+}
+
+.ep-btn {
+  display:block; width:300px;
+  margin:15px auto; padding:14px;
+  font-size:20px;
+  background:rgba(0,0,0,0.7); color:white;
+  border:none; border-radius:6px;
+  cursor:pointer;
+}
+.ep-btn:hover{background:rgba(0,0,0,0.9); transform:scale(1.05);}
+
+.video-container {
+  width:90%; max-width:900px;
+  margin:50px auto; background:black;
+  padding:20px; border-radius:10px;
+}
+
+video {
+  width:100%; height:auto; outline:none;
+  border-radius:12px;
+}
+
+/* NAVIGATION */
+.nav-buttons {
+  width:100%; display:flex;
+  justify-content:space-between;
+  margin-top:20px;
+}
+.nav-btn {
+  padding:12px 28px; font-size:20px;
+  background:rgba(0,0,0,0.7);
+  color:white; border:none; border-radius:6px;
+  cursor:pointer;
+}
+.nav-btn:hover{transform:scale(1.05);}
+</style>
+
+<script>
+function login(){
+  let u=document.getElementById("username").value;
+  let p=document.getElementById("password").value;
+
+  if(u==="CRSA_2010_11" && p==="Ara@1964"){
+    document.getElementById("loginPage").style.display="none";
+    openPage('mainPage');
+    document.getElementById("loginError").style.display="none";
+  } else {
+    document.getElementById("loginError").style.display="block";
+  }
+}
+
+function openPage(id){
+  document.querySelectorAll(".page").forEach(p=>{
+    if(p.id !== id){
+      p.classList.remove("active");
+      setTimeout(()=>{ p.style.display="none"; },400);
+    }
+  });
+
+  const pg=document.getElementById(id);
+  pg.style.display="block";
+  setTimeout(()=>pg.classList.add("active"),40);
+}
+</script>
+</head>
+<body>
+
+<!-- LOGIN PAGE -->
+<div id="loginPage">
+  <input id="username" class="login-input" placeholder="Username">
+  <input id="password" class="login-input" type="password" placeholder="Password">
+  <button class="login-btn" onclick="login()">Login</button>
+  <div id="loginError">Incorrect username or password</div>
+</div>
+
+<!-- MAIN PAGE -->
+<div id="mainPage" class="page">
+  <div class="main-title">Solo Leveling</div>
+  <button class="sub-btn" onclick="openPage('season1')">Season 1</button>
+  <button class="sub-btn" onclick="openPage('season2')">Season 2</button>
+</div>
+
+<!-- SEASON 1 LIST -->
+<div id="season1" class="page">
+  <div class="episode-title">Season 1 – Episode List</div>
+
+  <button class="ep-btn" onclick="openPage('s1ep1')">Episode 1</button>
+  <button class="ep-btn" onclick="openPage('s1ep2')">Episode 2</button>
+  <button class="ep-btn" onclick="openPage('s1ep3')">Episode 3</button>
+  <button class="ep-btn" onclick="openPage('s1ep4')">Episode 4</button>
+  <button class="ep-btn" onclick="openPage('s1ep5')">Episode 5</button>
+  <button class="ep-btn" onclick="openPage('s1ep6')">Episode 6</button>
+  <button class="ep-btn" onclick="openPage('s1ep7')">Episode 7</button>
+  <button class="ep-btn" onclick="openPage('s1ep8')">Episode 8</button>
+  <button class="ep-btn" onclick="openPage('s1ep9')">Episode 9</button>
+  <button class="ep-btn" onclick="openPage('s1ep10')">Episode 10</button>
+  <button class="ep-btn" onclick="openPage('s1ep11')">Episode 11</button>
+  <button class="ep-btn" onclick="openPage('s1ep12')">Episode 12</button>
+
+  <button class="sub-btn" onclick="openPage('mainPage')">Back to Home</button>
+</div>
+
+<!-- SEASON 2 LIST -->
+<div id="season2" class="page">
+  <div class="episode-title">Season 2 – Episode List</div>
+
+  <!-- Buttons will match episodes 1–13 -->
+  <button class="ep-btn" onclick="openPage('s2ep1')">Episode 1</button>
+  <button class="ep-btn" onclick="openPage('s2ep2')">Episode 2</button>
+  <button class="ep-btn" onclick="openPage('s2ep3')">Episode 3</button>
+  <button class="ep-btn" onclick="openPage('s2ep4')">Episode 4</button>
+  <button class="ep-btn" onclick="openPage('s2ep5')">Episode 5</button>
+  <button class="ep-btn' onclick="openPage('s2ep6')">Episode 6</button>
+  <button class="ep-btn" onclick="openPage('s2ep7')">Episode 7</button>
+  <button class="ep-btn" onclick="openPage('s2ep8')">Episode 8</button>
+  <button class="ep-btn" onclick="openPage('s2ep9')">Episode 9</button>
+  <button class="ep-btn" onclick="openPage('s2ep10')">Episode 10</button>
+  <button class="ep-btn" onclick="openPage('s2ep11')">Episode 11</button>
+  <button class="ep-btn" onclick="openPage('s2ep12')">Episode 12</button>
+  <button class="ep-btn" onclick="openPage('s2ep13')">Episode 13</button>
+
+  <!-- Placeholder buttons for 14–25 -->
+  <button class="ep-btn" onclick="openPage('s2ep14')">Episode 14</button>
+  <button class="ep-btn" onclick="openPage('s2ep15')">Episode 15</button>
+  <button class="ep-btn" onclick="openPage('s2ep16')">Episode 16</button>
+  <button class="ep-btn" onclick="openPage('s2ep17')">Episode 17</button>
+  <button class="ep-btn" onclick="openPage('s2ep18')">Episode 18</button>
+  <button class="ep-btn" onclick="openPage('s2ep19')">Episode 19</button>
+  <button class="ep-btn" onclick="openPage('s2ep20')">Episode 20</button>
+  <button class="ep-btn" onclick="openPage('s2ep21')">Episode 21</button>
+  <button class="ep-btn" onclick="openPage('s2ep22')">Episode 22</button>
+  <button class="ep-btn" onclick="openPage('s2ep23')">Episode 23</button>
+  <button class="ep-btn" onclick="openPage('s2ep24')">Episode 24</button>
+  <button class="ep-btn" onclick="openPage('s2ep25')">Episode 25</button>
+
+  <button class="sub-btn" onclick="openPage('mainPage')">Back to Home</button>
+</div>
+<!-- SEASON 1 EPISODES 1–6 -->
+
+<!-- S1 Episode 1 -->
+<div id="s1ep1" class="page">
+  <div class="episode-title">S1 • Episode 1 — I’m Used to It</div>
+  <div class="video-container">
+    <video controls controlsList="nodownload">
+      <source src="
+      https://meggdrive.xyz/wp-content/uploads/2025/01/solo-leveling-Ep-1_1718789129235.mp4
+      " type="video/mp4">
+    </video>
+  </div>
+  <div class="nav-buttons">
+    <button class="nav-btn" onclick="openPage('season1')">Episode List</button>
+    <button class="nav-btn" onclick="openPage('s1ep2')">Next</button>
+  </div>
+</div>
+
+<!-- S1 Episode 2 -->
+<div id="s1ep2" class="page">
+  <div class="episode-title">S1 • Episode 2 — If I Had One More Chance</div>
+  <div class="video-container">
+    <video controls controlsList="nodownload">
+      <source src="
+      https://meggdrive.xyz/wp-content/uploads/2025/01/solo-leveling-Ep-2.mp4
+      " type="video/mp4">
+    </video>
+  </div>
+  <div class="nav-buttons">
+    <button class="nav-btn" onclick="openPage('s1ep1')">Back</button>
+    <button class="nav-btn" onclick="openPage('s1ep3')">Next</button>
+    <button class="nav-btn" onclick="openPage('season1')">Episode List</button>
+  </div>
+</div>
+
+<!-- S1 Episode 3 -->
+<div id="s1ep3" class="page">
+  <div class="episode-title">S1 • Episode 3 — It’s Like a Game</div>
+  <div class="video-container">
+    <video controls controlsList="nodownload">
+      <source src="
+      https://meggdrive.xyz/wp-content/uploads/2025/01/solo-leveling-Ep-3.mp4
+      " type="video/mp4">
+    </video>
+  </div>
+  <div class="nav-buttons">
+    <button class="nav-btn" onclick="openPage('s1ep2')">Back</button>
+    <button class="nav-btn" onclick="openPage('s1ep4')">Next</button>
+    <button class="nav-btn" onclick="openPage('season1')">Episode List</button>
+  </div>
+</div>
+
+<!-- S1 Episode 4 -->
+<div id="s1ep4" class="page">
+  <div class="episode-title">S1 • Episode 4 — I’ve Gotta Get Stronger</div>
+  <div class="video-container">
+    <video controls controlsList="nodownload">
+      <source src="
+      https://meggdrive.xyz/wp-content/uploads/2025/01/solo-leveling-Ep-4.mp4
+      " type="video/mp4">
+    </video>
+  </div>
+  <div class="nav-buttons">
+    <button class="nav-btn" onclick="openPage('s1ep3')">Back</button>
+    <button class="nav-btn" onclick="openPage('s1ep5')">Next</button>
+    <button class="nav-btn" onclick="openPage('season1')">Episode List</button>
+  </div>
+</div>
+
+<!-- S1 Episode 5 -->
+<div id="s1ep5" class="page">
+  <div class="episode-title">S1 • Episode 5 — A Pretty Good Deal</div>
+  <div class="video-container">
+    <video controls controlsList="nodownload">
+      <source src="
+      https://meggdrive.xyz/wp-content/uploads/2025/01/solo-leveling-Ep-5.mp4
+      " type="video/mp4">
+    </video>
+  </div>
+  <div class="nav-buttons">
+    <button class="nav-btn" onclick="openPage('s1ep4')">Back</button>
+    <button class="nav-btn" onclick="openPage('s1ep6')">Next</button>
+    <button class="nav-btn" onclick="openPage('season1')">Episode List</button>
+  </div>
+</div>
+
+<!-- S1 Episode 6 -->
+<div id="s1ep6" class="page">
+  <div class="episode-title">S1 • Episode 6 — The Real Hunt Begins</div>
+  <div class="video-container">
+    <video controls controlsList="nodownload">
+      <source src="
+      https://meggdrive.xyz/wp-content/uploads/2025/01/solo-leveling-Ep-6.mp4
+      " type="video/mp4">
+    </video>
+  </div>
+  <div class="nav-buttons">
+    <button class="nav-btn" onclick="openPage('s1ep5')">Back</button>
+    <button class="nav-btn" onclick="openPage('s1ep7')">Next</button>
+    <button class="nav-btn" onclick="openPage('season1')">Episode List</button>
+  </div>
+</div>
+<!-- SEASON 1 EPISODES 7–12 -->
+
+<!-- S1 Episode 7 -->
+<div id="s1ep7" class="page">
+  <div class="episode-title">S1 • Episode 7 — Let’s See How Far I Can Go</div>
+  <div class="video-container">
+    <video controls controlsList="nodownload">
+      <source src="
+      https://meggdrive.xyz/wp-content/uploads/2025/01/solo-leveling-Ep-7.mp4
+      " type="video/mp4">
+    </video>
+  </div>
+  <div class="nav-buttons">
+    <button class="nav-btn" onclick="openPage('s1ep6')">Back</button>
+    <button class="nav-btn" onclick="openPage('s1ep8')">Next</button>
+    <button class="nav-btn" onclick="openPage('season1')">Episode List</button>
+  </div>
+</div>
+
+<!-- S1 Episode 8 -->
+<div id="s1ep8" class="page">
+  <div class="episode-title">S1 • Episode 8 — This Is Frustrating</div>
+  <div class="video-container">
+    <video controls controlsList="nodownload">
+      <source src="
+      https://meggdrive.xyz/wp-content/uploads/2025/01/solo-leveling-Ep-8.mp4
+      " type="video/mp4">
+    </video>
+  </div>
+  <div class="nav-buttons">
+    <button class="nav-btn" onclick="openPage('s1ep7')">Back</button>
+    <button class="nav-btn" onclick="openPage('s1ep9')">Next</button>
+    <button class="nav-btn" onclick="openPage('season1')">Episode List</button>
+  </div>
+</div>
+
+<!-- S1 Episode 9 -->
+<div id="s1ep9" class="page">
+  <div class="episode-title">S1 • Episode 9 — You’ve Been Hiding Your Skills</div>
+  <div class="video-container">
+    <video controls controlsList="nodownload">
+      <source src="
+      https://meggdrive.xyz/wp-content/uploads/2025/01/solo-leveling-Ep-9.mp4
+      " type="video/mp4">
+    </video>
+  </div>
+  <div class="nav-buttons">
+    <button class="nav-btn" onclick="openPage('s1ep8')">Back</button>
+    <button class="nav-btn" onclick="openPage('s1ep10')">Next</button>
+    <button class="nav-btn" onclick="openPage('season1')">Episode List</button>
+  </div>
+</div>
+
+<!-- S1 Episode 10 -->
+<div id="s1ep10" class="page">
+  <div class="episode-title">S1 • Episode 10 — What Is This, a Picnic?</div>
+  <div class="video-container">
+    <video controls controlsList="nodownload">
+      <source src="
+      https://www.febspot.com/get_file/23/aa8458e9888505725d53ec0bda0220ae/1921000/1921878/1921878_720p.mp4
+      " type="video/mp4">
+    </video>
+  </div>
+  <div class="nav-buttons">
+    <button class="nav-btn" onclick="openPage('s1ep9')">Back</button>
+    <button class="nav-btn" onclick="openPage('s1ep11')">Next</button>
+    <button class="nav-btn" onclick="openPage('season1')">Episode List</button>
+  </div>
+</div>
+
+<!-- S1 Episode 11 -->
+<div id="s1ep11" class="page">
+  <div class="episode-title">S1 • Episode 11 — A Knight Who Defends an Empty Throne?</div>
+  <div class="video-container">
+    <video controls controlsList="nodownload">
+      <source src="
+      https://meggdrive.xyz/wp-content/uploads/2025/01/solo-leveling-Ep-11.mp4
+      " type="video/mp4">
+    </video>
+  </div>
+  <div class="nav-buttons">
+    <button class="nav-btn" onclick="openPage('s1ep10')">Back</button>
+    <button class="nav-btn" onclick="openPage('s1ep12')">Next</button>
+    <button class="nav-btn" onclick="openPage('season1')">Episode List</button>
+  </div>
+</div>
+
+<!-- S1 Episode 12 -->
+<div id="s1ep12" class="page">
+  <div class="episode-title">S1 • Episode 12 — Arise</div>
+  <div class="video-container">
+    <video controls controlsList="nodownload">
+      <source src="
+      https://meggdrive.xyz/wp-content/uploads/2025/01/solo-leveling-Ep-12.mp4
+      " type="video/mp4">
+    </video>
+  </div>
+  <div class="nav-buttons">
+    <button class="nav-btn" onclick="openPage('s1ep11')">Back</button>
+    <button class="nav-btn" onclick="openPage('season1')">Episode List</button>
+  </div>
+</div>
+<!-- SEASON 2 EPISODES 1–7 -->
+
+<!-- S2 Episode 1 -->
+<div id="s2ep1" class="page">
+  <div class="episode-title">S2 • Episode 1 — You Aren’t E-Rank, Are You?</div>
+  <div class="video-container">
+    <video controls controlsList="nodownload">
+      <source src="
+      https://meggdrive.xyz/wp-content/uploads/2025/01/Solo-Leveling-Season-2-Ep-1-Eng-Dub.mp4
+      " type="video/mp4">
+    </video>
+  </div>
+  <div class="nav-buttons">
+    <button class="nav-btn" onclick="openPage('season2')">Back</button>
+    <button class="nav-btn" onclick="openPage('s2ep2')">Next</button>
+    <button class="nav-btn" onclick="openPage('season2')">Episode List</button>
+  </div>
+</div>
+
+<!-- S2 Episode 2 -->
+<div id="s2ep2" class="page">
+  <div class="episode-title">S2 • Episode 2 — I Suppose You Aren’t Aware</div>
+  <div class="video-container">
+    <video controls controlsList="nodownload">
+      <source src="https://meggdrive.xyz/wp-content/uploads/2025/01/Solo-Leveling-Season-2-Episode-2-Dub-1.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="nav-buttons">
+    <button class="nav-btn" onclick="openPage('s2ep1')">Back</button>
+    <button class="nav-btn" onclick="openPage('s2ep3')">Next</button>
+    <button class="nav-btn" onclick="openPage('season2')">Episode List</button>
+  </div>
+</div>
+
+<!-- S2 Episode 3 -->
+<div id="s2ep3" class="page">
+  <div class="episode-title">S2 • Episode 3 — Still a Long Way to Go</div>
+  <div class="video-container">
+    <video controls controlsList="nodownload">
+      <source src="https://meggdrive.xyz/wp-content/uploads/2025/02/Solo-Leveling-Season-2-ep-3-Eng.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="nav-buttons">
+    <button class="nav-btn" onclick="openPage('s2ep2')">Back</button>
+    <button class="nav-btn" onclick="openPage('s2ep4')">Next</button>
+    <button class="nav-btn" onclick="openPage('season2')">Episode List</button>
+  </div>
+</div>
+
+<!-- S2 Episode 4 -->
+<div id="s2ep4" class="page">
+  <div class="episode-title">S2 • Episode 4 — I Need to Stop Faking</div>
+  <div class="video-container">
+    <video controls controlsList="nodownload">
+      <source src="https://meggdrive.xyz/wp-content/uploads/2025/02/Solo-Leveling-Season-2-ep-4-dub.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="nav-buttons">
+    <button class="nav-btn" onclick="openPage('s2ep3')">Back</button>
+    <button class="nav-btn" onclick="openPage('s2ep5')">Next</button>
+    <button class="nav-btn" onclick="openPage('season2')">Episode List</button>
+  </div>
+</div>
+
+<!-- S2 Episode 5 -->
+<div id="s2ep5" class="page">
+  <div class="episode-title">S2 • Episode 5 — This Is What We’re Trained to Do</div>
+  <div class="video-container">
+    <video controls controlsList="nodownload">
+      <source src="https://meggdrive.xyz/wp-content/uploads/2025/03/Solo-Leveling-Season-2-episode-5-dub.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="nav-buttons">
+    <button class="nav-btn" onclick="openPage('s2ep4')">Back</button>
+    <button class="nav-btn" onclick="openPage('s2ep6')">Next</button>
+    <button class="nav-btn" onclick="openPage('season2')">Episode List</button>
+  </div>
+</div>
+
+<!-- S2 Episode 6 -->
+<div id="s2ep6" class="page">
+  <div class="episode-title">S2 • Episode 6 — Don’t Look Down on My Guys</div>
+  <div class="video-container">
+    <video controls controlsList="nodownload">
+      <source src="https://meggdrive.xyz/wp-content/uploads/2025/02/Solo-Leveling-Season-2-Episode-6-eng-dub.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="nav-buttons">
+    <button class="nav-btn" onclick="openPage('s2ep5')">Back</button>
+    <button class="nav-btn" onclick="openPage('s2ep7')">Next</button>
+    <button class="nav-btn" onclick="openPage('season2')">Episode List</button>
+  </div>
+</div>
+
+<!-- S2 Episode 7 -->
+<div id="s2ep7" class="page">
+  <div class="episode-title">S2 • Episode 7 — The 10th S-Rank Hunter</div>
+  <div class="video-container">
+    <video controls controlsList="nodownload">
+      <source src="https://meggdrive.xyz/wp-content/uploads/2025/03/Solo-Leveling-Season-2-ep-7-dubbed-2.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="nav-buttons">
+    <button class="nav-btn" onclick="openPage('s2ep6')">Back</button>
+    <button class="nav-btn" onclick="openPage('s2ep8')">Next</button>
+    <button class="nav-btn" onclick="openPage('season2')">Episode List</button>
+  </div>
+</div>
+<!-- SEASON 2 EPISODES 8–13 -->
+
+<!-- S2 Episode 8 -->
+<div id="s2ep8" class="page">
+  <div class="episode-title">S2 • Episode 8 — Looking Up Was Tiring Me Out</div>
+  <div class="video-container">
+    <video controls controlsList="nodownload">
+      <source src="https://meggdrive.xyz/wp-content/uploads/2025/03/Solo-Leveling-Season-2-Episode-8-Dub_1.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="nav-buttons">
+    <button class="nav-btn" onclick="openPage('s2ep7')">Back</button>
+    <button class="nav-btn" onclick="openPage('s2ep9')">Next</button>
+    <button class="nav-btn" onclick="openPage('season2')">Episode List</button>
+  </div>
+</div>
+
+<!-- S2 Episode 9 -->
+<div id="s2ep9" class="page">
+  <div class="episode-title">S2 • Episode 9 — It Was All Worth It</div>
+  <div class="video-container">
+    <video controls controlsList="nodownload">
+      <source src="https://meggdrive.xyz/wp-content/uploads/2025/03/Solo-Leveling-Season-2-Episode-9-English-Dubb.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="nav-buttons">
+    <button class="nav-btn" onclick="openPage('s2ep8')">Back</button>
+    <button class="nav-btn" onclick="openPage('s2ep10')">Next</button>
+    <button class="nav-btn" onclick="openPage('season2')">Episode List</button>
+  </div>
+</div>
+
+<!-- S2 Episode 10 -->
+<div id="s2ep10" class="page">
+  <div class="episode-title">S2 • Episode 10 — We Need a Hero</div>
+  <div class="video-container">
+    <video controls controlsList="nodownload">
+      <source src="https://meggdrive.xyz/wp-content/uploads/2025/03/Solo-Leveling-Season-2-ep-10-dubbed.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="nav-buttons">
+    <button class="nav-btn" onclick="openPage('s2ep9')">Back</button>
+    <button class="nav-btn" onclick="openPage('s2ep11')">Next</button>
+    <button class="nav-btn" onclick="openPage('season2')">Episode List</button>
+  </div>
+</div>
+
+<!-- S2 Episode 11 -->
+<div id="s2ep11" class="page">
+  <div class="episode-title">S2 • Episode 11 — It’s Going to Get Even More Intense</div>
+  <div class="video-container">
+    <video controls controlsList="nodownload">
+      <source src="https://meggdrive.xyz/wp-content/uploads/2025/04/Solo-Leveling-Season-2-ep-11-dub.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="nav-buttons">
+    <button class="nav-btn" onclick="openPage('s2ep10')">Back</button>
+    <button class="nav-btn" onclick="openPage('s2ep12')">Next</button>
+    <button class="nav-btn" onclick="openPage('season2')">Episode List</button>
+  </div>
+</div>
+
+<!-- S2 Episode 12 -->
+<div id="s2ep12" class="page">
+  <div class="episode-title">S2 • Episode 12 — Are You the King of Humans?</div>
+  <div class="video-container">
+    <video controls controlsList="nodownload">
+      <source src="https://meggdrive.xyz/wp-content/uploads/2025/04/Solo-Leveling-Season-2-episode-12-Dub.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="nav-buttons">
+    <button class="nav-btn" onclick="openPage('s2ep11')">Back</button>
+    <button class="nav-btn" onclick="openPage('s2ep13')">Next</button>
+    <button class="nav-btn" onclick="openPage('season2')">Episode List</button>
+  </div>
+</div>
+
+<!-- S2 Episode 13 -->
+<div id="s2ep13" class="page">
+  <div class="episode-title">S2 • Episode 13 — On to the Next Target</div>
+  <div class="video-container">
+    <video controls controlsList="nodownload">
+      <source src="https://meggdrive.xyz/wp-content/uploads/2025/04/Solo-Leveling-Season-2-Ep-13-dub.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="nav-buttons">
+    <button class="nav-btn" onclick="openPage('s2ep12')">Back</button>
+    <button class="nav-btn" onclick="openPage('season2')">Episode List</button>
+  </div>
+</div>
+<!-- BACK TO MAIN PAGE BUTTONS FOR SEASON PAGES -->
+<!-- Season 1 and Season 2 already have "Back to Home" buttons -->
+
+<!-- Example (already included in your season pages) -->
+<!-- <button class="sub-btn" onclick="openPage('mainPage')">Back to Home</button> -->
+
+<!-- END OF WEBSITE CONTENT -->
+
+</body>
+</html>
+https://meggdrive.xyz/wp-content/uploads/2025/01/solo-leveling-Ep-12.mp4
